@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import * as ReactNative from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
 
 import dateutils from '../dateutils';
-import {xdateToData, parseDate} from '../interface';
+import { xdateToData, parseDate } from '../interface';
 import styleConstructor from './style';
 import Day from './day/basic';
 import UnitDay from './day/period';
@@ -13,14 +13,14 @@ import MultiPeriodDay from './day/multi-period';
 import SingleDay from './day/custom';
 import CalendarHeader from './header';
 import shouldComponentUpdate from './updater';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import {SELECT_DATE_SLOT} from '../testIDs';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import { SELECT_DATE_SLOT } from '../testIDs';
 
 //Fallback for react-native-web or when RN version is < 0.44
-const {View, ViewPropTypes} = ReactNative;
+const { View, ViewPropTypes } = ReactNative;
 const viewPropTypes =
   typeof document !== 'undefined'
-    ? PropTypes.shape({style: PropTypes.object})
+    ? PropTypes.shape({ style: PropTypes.object })
     : ViewPropTypes || View.propTypes;
 const EmptyArray = [];
 
@@ -198,7 +198,7 @@ class Calendar extends Component {
     }
 
     if (!dateutils.sameMonth(day, this.state.currentMonth) && this.props.hideExtraDays) {
-      return (<View key={id} style={{flex: 1}}/>);
+      return (<View key={id} style={{ flex: 1 }} />);
     }
 
     const DayComp = this.getDayComponent();
@@ -207,7 +207,7 @@ class Calendar extends Component {
     const accessibilityLabel = this.getAccessibilityLabel(state, day);
 
     return (
-      <View style={{flex: 1, alignItems: 'center'}} key={id}>
+      <View style={{ flex: 1, alignItems: 'center' }} key={id}>
         <DayComp
           testID={`${SELECT_DATE_SLOT}-${dateAsObject.dateString}`}
           state={state}
@@ -260,16 +260,16 @@ class Calendar extends Component {
     }
 
     switch (this.props.markingType) {
-    case 'period':
-      return UnitDay;
-    case 'multi-dot':
-      return MultiDotDay;
-    case 'multi-period':
-      return MultiPeriodDay;
-    case 'custom':
-      return SingleDay;
-    default:
-      return Day;
+      case 'period':
+        return UnitDay;
+      case 'multi-dot':
+        return MultiDotDay;
+      case 'multi-period':
+        return MultiPeriodDay;
+      case 'custom':
+        return SingleDay;
+      default:
+        return Day;
     }
   }
 
@@ -287,18 +287,18 @@ class Calendar extends Component {
   }
 
   onSwipe = (gestureName) => {
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+    const { SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
 
     switch (gestureName) {
-    case SWIPE_UP:
-    case SWIPE_DOWN:
-      break;
-    case SWIPE_LEFT:
-      this.onSwipeLeft();
-      break;
-    case SWIPE_RIGHT:
-      this.onSwipeRight();
-      break;
+      case SWIPE_UP:
+      case SWIPE_DOWN:
+        break;
+      case SWIPE_LEFT:
+        this.onSwipeLeft();
+        break;
+      case SWIPE_RIGHT:
+        this.onSwipeRight();
+        break;
     }
   }
 
@@ -312,11 +312,11 @@ class Calendar extends Component {
 
   renderWeekNumber(weekNumber) {
     return (
-      <View style={{flex: 1, alignItems: 'center'}} key={`week-container-${weekNumber}`}>
+      <View style={{ flex: 1, alignItems: 'center' }} key={`week-container-${weekNumber}`}>
         <Day
           key={`week-${weekNumber}`}
           theme={this.props.theme}
-          marking={{disableTouchEvent: true}}
+          marking={{ disableTouchEvent: true }}
           state='disabled'
         >
           {weekNumber}
@@ -339,8 +339,8 @@ class Calendar extends Component {
   }
 
   render() {
-    const {currentMonth} = this.state;
-    const {firstDay, showSixWeeks, hideExtraDays, enableSwipeMonths} = this.props;
+    const { currentMonth } = this.state;
+    const { firstDay, showSixWeeks, hideExtraDays, enableSwipeMonths } = this.props;
     const shouldShowSixWeeks = showSixWeeks && !hideExtraDays;
     const days = dateutils.page(currentMonth, firstDay, shouldShowSixWeeks);
 
@@ -360,12 +360,15 @@ class Calendar extends Component {
     }
 
     const GestureComponent = enableSwipeMonths ? GestureRecognizer : View;
-    const gestureProps = enableSwipeMonths ? {onSwipe: (direction, state) => this.onSwipe(direction, state)} : {};
+    const gestureProps = enableSwipeMonths ? { onSwipe: (direction, state) => this.onSwipe(direction, state) } : {};
+    console.log('stylestylestyle', this.props.style);
 
     return (
       <GestureComponent {...gestureProps}>
         <View
-          style={[this.style.container, this.props.style]}
+          // style={[this.style.container, this.props.style]}
+          style={[this.style.container, this.props.style,
+          this.props.isFullScreen ? { height: '100%' } : null]}
           accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
           importantForAccessibility={this.props.importantForAccessibility} // Android
         >

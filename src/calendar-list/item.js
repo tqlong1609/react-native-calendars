@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import Calendar from '../calendar';
 import styleConstructor from './style';
 
@@ -61,7 +61,7 @@ class CalendarListItem extends Component {
         <Calendar
           testID={`${this.props.testID}_${row}`}
           theme={this.props.theme}
-          style={[{height: this.props.calendarHeight, width: this.props.calendarWidth}, this.style.calendar, this.props.style]}
+          style={[{ height: this.props.calendarHeight, width: this.props.calendarWidth }, this.style.calendar, this.props.style]}
           current={row}
           hideArrows={this.props.hideArrows}
           hideExtraDays={this.props.hideExtraDays}
@@ -87,13 +87,15 @@ class CalendarListItem extends Component {
           importantForAccessibility={this.props.importantForAccessibility} // Android
           renderHeader={this.props.renderHeader}
           disableAllTouchEventsForDisabledDays={this.props.disableAllTouchEventsForDisabledDays}
+          // edit
+          isFullScreen={this.props.isFullScreen}
         />
       );
     } else {
       const text = row.toString();
 
       return (
-        <View style={[{height: this.props.calendarHeight, width: this.props.calendarWidth}, this.style.placeholder]}>
+        <View style={[{ height: this.props.calendarHeight, width: this.props.calendarWidth }, this.style.placeholder]}>
           <Text allowFontScaling={false} style={this.style.placeholderText}>{text}</Text>
         </View>
       );

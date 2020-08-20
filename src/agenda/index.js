@@ -430,6 +430,12 @@ export default class AgendaView extends Component {
         <Animated.View style={headerStyle}>
           <Animated.View style={{flex: 1, transform: [{translateY: contentTranslate}]}}>
             <CalendarList
+
+              //edit
+              horizontal={this.props.horizontal}
+              pagingEnabled={this.props.pagingEnabled}
+              //------------------------------
+
               onLayout={() => {
                 this.calendar.scrollToDay(this.state.selectedDay.clone(), this.calendarOffset(), false);
               }}
@@ -440,6 +446,10 @@ export default class AgendaView extends Component {
               minDate={this.props.minDate}
               maxDate={this.props.maxDate}
               current={this.currentMonth}
+
+              // edit
+              isFullScreen={this.props.isFullScreen}
+              
               markedDates={this.generateMarkings()}
               markingType={this.props.markingType}
               removeClippedSubviews={this.props.removeClippedSubviews}
