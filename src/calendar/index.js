@@ -361,14 +361,19 @@ class Calendar extends Component {
 
     const GestureComponent = enableSwipeMonths ? GestureRecognizer : View;
     const gestureProps = enableSwipeMonths ? { onSwipe: (direction, state) => this.onSwipe(direction, state) } : {};
-    console.log('stylestylestyle', this.props.style);
 
     return (
       <GestureComponent {...gestureProps}>
         <View
-          // style={[this.style.container, this.props.style]}
+
+
+          //edit
+          //OLD: style={[this.style.container, this.props.style]}
+          //NEW:
           style={[this.style.container, this.props.style,
           this.props.isFullScreen ? { height: '100%' } : null]}
+          //--------------------------
+
           accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
           importantForAccessibility={this.props.importantForAccessibility} // Android
         >
