@@ -219,6 +219,8 @@ class CalendarList extends Component {
         style={this.props.calendarStyle}
         // edit
         isFullScreen={this.props.isFullScreen}
+        isShowLoading={this.props.isShowLoading}
+        //------------------
       />
     );
   }
@@ -261,6 +263,7 @@ class CalendarList extends Component {
     });
   }
 
+  //TODO: ActivityIndicator
   renderStaticHeader() {
     const { staticHeader, horizontal } = this.props;
     const useStaticHeader = staticHeader && horizontal;
@@ -294,6 +297,7 @@ class CalendarList extends Component {
     }
   }
 
+  //TODO:
   render() {
     return (
       <View>

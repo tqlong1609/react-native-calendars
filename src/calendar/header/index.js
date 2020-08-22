@@ -189,6 +189,7 @@ class CalendarHeader extends Component {
       indicator = <ActivityIndicator color={this.props.theme && this.props.theme.indicatorColor}/>;
     }
 
+    //TODO:
     return (
       <View
         testID={testID}

@@ -74,6 +74,7 @@ class CalendarListItem extends Component {
           displayLoadingIndicator={this.props.displayLoadingIndicator}
           minDate={this.props.minDate}
           maxDate={this.props.maxDate}
+          isShowLoading={this.props.isShowLoading}
           firstDay={this.props.firstDay}
           monthFormat={this.props.monthFormat}
           dayComponent={this.props.dayComponent}
@@ -89,6 +90,7 @@ class CalendarListItem extends Component {
           disableAllTouchEventsForDisabledDays={this.props.disableAllTouchEventsForDisabledDays}
           // edit
           isFullScreen={this.props.isFullScreen}
+          //-------------
         />
       );
     } else {

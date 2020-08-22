@@ -100,7 +100,6 @@ export default class AgendaView extends Component {
 
   constructor(props) {
     super(props);
-
     this.styles = styleConstructor(props.theme);
 
     const windowSize = Dimensions.get('window');
@@ -118,7 +117,7 @@ export default class AgendaView extends Component {
       // NEW:
       calendarScrollable: props.isShowBegin ? true : false,
       //---------------------
-      
+
       firstResevationLoad: false,
       selectedDay: parseDate(this.props.selected) || XDate(true),
       topDay: parseDate(this.props.selected) || XDate(true),
@@ -482,6 +481,8 @@ export default class AgendaView extends Component {
               //edit
               horizontal={this.props.horizontal}
               pagingEnabled={this.props.pagingEnabled}
+              isFullScreen={this.props.isFullScreen}
+              isShowLoading={this.props.isShowLoading}
               //------------------------------
 
               onLayout={() => {
@@ -494,10 +495,6 @@ export default class AgendaView extends Component {
               minDate={this.props.minDate}
               maxDate={this.props.maxDate}
               current={this.currentMonth}
-
-              // edit
-              isFullScreen={this.props.isFullScreen}
-
               markedDates={this.generateMarkings()}
               markingType={this.props.markingType}
               removeClippedSubviews={this.props.removeClippedSubviews}

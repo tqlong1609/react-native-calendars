@@ -185,6 +185,7 @@ class ReservationList extends Component {
     return {reservations, scrollPosition};
   }
 
+  //TODO:
   render() {
     const {reservations} = this.props;
     if (!reservations || !reservations[this.props.selectedDay.toString('yyyy-MM-dd')]) {

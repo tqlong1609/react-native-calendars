@@ -17,7 +17,7 @@ import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { SELECT_DATE_SLOT } from '../testIDs';
 
 //Fallback for react-native-web or when RN version is < 0.44
-const { View, ViewPropTypes } = ReactNative;
+const { View, ViewPropTypes, Text } = ReactNative;
 const viewPropTypes =
   typeof document !== 'undefined'
     ? PropTypes.shape({ style: PropTypes.object })
@@ -182,7 +182,6 @@ class Calendar extends Component {
     return `${isToday ? 'today' : ''} ${day.toString('dddd d MMMM yyyy')} ${markingLabel}`;
   }
 
-
   renderDay(day, id) {
     const minDate = parseDate(this.props.minDate);
     const maxDate = parseDate(this.props.maxDate);
@@ -205,7 +204,7 @@ class Calendar extends Component {
     const date = day.getDate();
     const dateAsObject = xdateToData(day);
     const accessibilityLabel = this.getAccessibilityLabel(state, day);
-
+    console.log('this.props.avatar', this.props.avatar)
     return (
       <View style={{ flex: 1, alignItems: 'center' }} key={id}>
         <DayComp
@@ -221,6 +220,9 @@ class Calendar extends Component {
         >
           {date}
         </DayComp>
+
+        {/*TODO: Edit avatar*/}
+
       </View>
     );
   }
@@ -353,10 +355,27 @@ class Calendar extends Component {
     const current = parseDate(this.props.current);
     if (current) {
       const lastMonthOfDay = current.clone().addMonths(1, true).setDate(1).addDays(-1).toString('yyyy-MM-dd');
-      if (this.props.displayLoadingIndicator &&
-        !(this.props.markedDates && this.props.markedDates[lastMonthOfDay])) {
-        indicator = true;
+
+      //TODO:
+      // edit:
+      // old:
+      // if (this.props.displayLoadingIndicator &&
+      //   !(this.props.markedDates && this.props.markedDates[lastMonthOfDay])) {
+      //   indicator = true;
+      // }
+      //new: 
+      if (this.props.isShowLoading !== undefined) {
+        if (this.props.isShowLoading && this.props.displayLoadingIndicator) { indicator = true; }
+        if (!this.props.isShowLoading && this.props.displayLoadingIndicator) { indicator = false; }
       }
+      else {
+        if (this.props.displayLoadingIndicator &&
+          !(this.props.markedDates && this.props.markedDates[lastMonthOfDay])) {
+          indicator = true;
+        }
+      }
+
+      //------------------------
     }
 
     const GestureComponent = enableSwipeMonths ? GestureRecognizer : View;
